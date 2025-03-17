@@ -22,4 +22,9 @@
         android:name="alanspricigo.com.br.almoxarifado.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_cad_prod"
+        android:name="alanspricigo.com.br.almoxarifado.ui.produto.CadProdFragment"
+        android:label="@string/title_cad_prod"
+        tools:layout="@layout/fragment_cad_prod" />
 </navigation>
