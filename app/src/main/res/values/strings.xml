@@ -9,4 +9,10 @@
     <string name="title_cad_prod">Cadastro</string>
     <string name="cod_prod">Código do Produto</string>
     <string name="hint_code">6ES7214-1AG40-0XB0</string>
+    <string name="nome_prod">Nome do Produto</string>
+    <string name="hint_name">S7-1200 DC/DC/Rly</string>
+    <string name="data_entrada">Data de Entrada</string>
+    <string name="nome_fabr">Fabricante</string>
+    <string name="hint_fabr">Siemens</string>
+    <string name="but_cad">Cadastrar</string>
 </resources>

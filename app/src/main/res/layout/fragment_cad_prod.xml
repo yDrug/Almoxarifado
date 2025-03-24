@@ -15,11 +15,24 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nome_prod" />
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_name"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:minHeight="48dp" />
+            <TextView
+                android:id="@+id/textViewCod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/cod_prod" />
-
             <EditText
                 android:id="@+id/etCod"
                 android:layout_width="match_parent"
@@ -29,7 +42,35 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:minHeight="48dp" />
+            <TextView
+                android:id="@+id/textViewEntrada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/data_entrada" />
+            <CalendarView
+                android:id="@+id/cvDataEntrada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/textViewFabr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nome_fabr" />
+            <EditText
+                android:id="@+id/etFabr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_fabr"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:minHeight="48dp" />
+
+            <Button
+                android:id="@+id/buttonCad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/but_cad" />
         </LinearLayout>
     </ScrollView>
-
 </FrameLayout>
