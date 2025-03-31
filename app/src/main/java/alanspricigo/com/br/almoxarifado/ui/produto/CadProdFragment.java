@@ -7,15 +7,23 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import alanspricigo.com.br.almoxarifado.R;
+import alanspricigo.com.br.almoxarifado.model.Dados;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CadProdFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CadProdFragment extends Fragment {
+public class CadProdFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +33,14 @@ public class CadProdFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private View view;
+    //Entradas da tela
+
+    private EditText etName;
+    private EditText etCod;
+    private CalendarView cvDataEntrada;
+    private EditText etFabr;
+    private Button buttonCad;
 
     public CadProdFragment() {
         // Required empty public constructor
@@ -61,6 +77,37 @@ public class CadProdFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cad_prod, container, false);
+        this.view = inflater.inflate(R.layout.fragment_cad_prod, container, false);
+        //Binding - Conectando as entradas dos objetos da tela com os componentes XML
+        this.etName = view.findViewById(R.id.etName);
+        this.etCod = view.findViewById(R.id.etCod);
+        this.cvDataEntrada = view.findViewById(R.id.cvDataEntrada);
+        this.etFabr = view.findViewById(R.id.etFabr);
+        this.buttonCad = view.findViewById(R.id.buttonCad);
+
+        this.buttonCad.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (view.getId() == R.id.buttonCad)
+        {
+            try {
+                //Instacía objeto de negócio (Dados sendo coletados das minhas entradas de informações)
+                Dados dados = new Dados();
+                //Coloca dados da tela no objeto
+                dados.setNomeProd(this.etName.getText().toString());
+                dados.setCodProd(this.etCod.getText().toString());
+                // Formato para transformar data do CalendarView em String
+                SimpleDateFormat sdf = SimpleDateFormat("dd/MM/yyyy");
+                String dataSelecionada = sdf.format(new Date(cvDataEntrada.getDate()));
+                dados.setFabrProd(this.etFabr.getText().toString());
+                Toast.makeText(view.getContext(), "Cadastro com sucesso.", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
