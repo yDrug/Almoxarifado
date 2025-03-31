@@ -101,7 +101,7 @@ public class CadProdFragment extends Fragment implements View.OnClickListener {
                 dados.setNomeProd(this.etName.getText().toString());
                 dados.setCodProd(this.etCod.getText().toString());
                 // Formato para transformar data do CalendarView em String
-                SimpleDateFormat sdf = SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String dataSelecionada = sdf.format(new Date(cvDataEntrada.getDate()));
                 dados.setFabrProd(this.etFabr.getText().toString());
                 Toast.makeText(view.getContext(), "Cadastro com sucesso.", Toast.LENGTH_SHORT).show();
