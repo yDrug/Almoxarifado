@@ -27,4 +27,9 @@
         android:name="alanspricigo.com.br.almoxarifado.ui.produto.CadProdFragment"
         android:label="@string/title_cad_prod"
         tools:layout="@layout/fragment_cad_prod" />
+    <fragment
+        android:id="@+id/navigation_con_prod"
+        android:name="alanspricigo.com.br.almoxarifado.ui.produto.ConProdutoFragment"
+        android:label="@string/title_con_prod"
+        tools:layout="@layout/fragment_con_produto_list" />
 </navigation>

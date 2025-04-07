@@ -104,7 +104,6 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
         this.buttonCad.setOnClickListener(this);
 
 
-
         //instanciando a fila de requests - caso o objeto seja o view
         this.requestQueue = Volley.newRequestQueue(view.getContext());
 //inicializando a fila de requests do SO
@@ -112,10 +111,10 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
 
         return view;
     }
+
     @Override
     public void onClick(View v) {
-        if (view.getId() == R.id.buttonCad)
-        {
+        if (view.getId() == R.id.buttonCad) {
             try {
                 //Instacía objeto de negócio (Dados sendo coletados das minhas entradas de informações)
                 Dados dados = new Dados();
@@ -137,15 +136,16 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
             }
         }
     }
+
     @Override
-    public void onErrorResponse(VolleyError error)
-    {
+    public void onErrorResponse(VolleyError error) {
         Snackbar mensagem = Snackbar.make(view,
                 "Ops! Houve um problema ao realizar o cadastro: " +
-                        error.toString(),Snackbar.LENGTH_LONG);
+                        error.toString(), Snackbar.LENGTH_LONG);
         mensagem.show();
 
     }
+
     @Override
     public void onResponse(Object response) {
         try {
@@ -157,7 +157,7 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
             //duração da mensagem na tela
             int duration = Toast.LENGTH_SHORT;
             //verificando se salvou sem erro para limpar campos da tela
-            if (json.getBoolean("success")){
+            if (json.getBoolean("success")) {
 //limpar campos da tela
                 this.etName.setText("");
                 this.etCod.setText("");
@@ -167,9 +167,10 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
                 this.cvDataEntrada.setDate(today, false, true);
             }
 //mostrando a mensagem que veio do JSON
-            Toast toast = Toast.makeText (context, mensagem, duration);
+            Toast toast = Toast.makeText(context, mensagem, duration);
             toast.show();
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }
+}
