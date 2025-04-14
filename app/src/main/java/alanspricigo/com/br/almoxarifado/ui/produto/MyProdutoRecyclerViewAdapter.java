@@ -7,20 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import alanspricigo.com.br.almoxarifado.model.Dados;
 import alanspricigo.com.br.almoxarifado.ui.produto.placeholder.PlaceholderContent.PlaceholderItem;
 import alanspricigo.com.br.almoxarifado.databinding.FragmentConProdutoBinding;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
+ * {@link RecyclerView.Adapter} that can display a {@link Dados.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyProdutoRecyclerViewAdapter extends RecyclerView.Adapter<MyProdutoRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<Dados> mValues;
 
-    public MyProdutoRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public MyProdutoRecyclerViewAdapter(List<Dados> items) {
         mValues = items;
     }
 
@@ -34,8 +35,8 @@ public class MyProdutoRecyclerViewAdapter extends RecyclerView.Adapter<MyProduto
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).getCodProd());
+        holder.mContentView.setText(mValues.get(position).getCodProd());
     }
 
     @Override
@@ -46,7 +47,7 @@ public class MyProdutoRecyclerViewAdapter extends RecyclerView.Adapter<MyProduto
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public Dados mItem;
 
         public ViewHolder(FragmentConProdutoBinding binding) {
             super(binding.getRoot());
