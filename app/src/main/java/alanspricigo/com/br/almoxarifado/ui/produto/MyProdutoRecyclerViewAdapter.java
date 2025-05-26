@@ -8,15 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import alanspricigo.com.br.almoxarifado.model.Dados;
-import alanspricigo.com.br.almoxarifado.ui.produto.placeholder.PlaceholderContent.PlaceholderItem;
 import alanspricigo.com.br.almoxarifado.databinding.FragmentConProdutoBinding;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link Dados.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyProdutoRecyclerViewAdapter extends RecyclerView.Adapter<MyProdutoRecyclerViewAdapter.ViewHolder> {
 
     private final List<Dados> mValues;
