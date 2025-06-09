@@ -13,25 +13,18 @@ import java.util.Objects;
 public class Dados
 {
     //atributos
-    private String nomeProd;
+    private int qtdProd;
     private String codProd;
     private String dataEntr;
-    private String fabrProd;
+    private double vlProd;
     //métodos
-    public String getNomeProd()
+    public int getQtdProd()
     {
-        return this.nomeProd;
+        return this.qtdProd;
     }
-    public void setNomeProd(String Np)
+    public void setQtdProd(int Np)
     {
-        if (Np.length() > 3) //Limitada para que o nome do produto tenha pelo menos 4 letras.
-        {
-            this.nomeProd = Np;
-        }
-            else
-            {
-                this.nomeProd = "Nome Inválido";
-            }
+        this.qtdProd = Np;
     }
     public String getCodProd()
     {
@@ -39,14 +32,8 @@ public class Dados
     }
     public void setCodProd(String Cp)
     {
-        if (Cp.length() > 3) //Limitada para que o código do produto tenha pelo menos 4 caracteres.
-        {
             this.codProd = Cp;
-        }
-        else
-        {
-            this.codProd = "Código Inválido";
-        }
+
     }
     public String getDataEntr()
     {
@@ -64,38 +51,38 @@ public class Dados
             this.dataEntr = "1900-01-01";
         }
     }
-    public String getFabrProd()
+    public double getVlProd()
     {
-        return this.fabrProd;
+        return this.vlProd;
     }
-    public void setFabrProd(String Fp)
+    public void setVlProd(double Fp)
     {
-        fabrProd = Fp;
+        vlProd = Fp;
     }
     public Dados (JSONObject jp) {
         try {
-            this.setNomeProd(jp.getString("nome_prod"));
-            this.setCodProd(jp.getString("cod_prod"));
-            this.setDataEntr(jp.getString("data_prod"));
-            this.setFabrProd(jp.getString("fabr_prod"));
+            this.setQtdProd(jp.getInt("qtEntrada"));
+            this.setCodProd(jp.getString("idProduto"));
+            this.setDataEntr(jp.getString("dtEntrada"));
+            this.setVlProd(jp.getDouble("vlEntrada"));
         } catch (Exception e)
         {
             Log.e("Dados", Objects.requireNonNull(e.getMessage()));
         }
     }
     public Dados () {
-        this.setNomeProd("");
+        this.setQtdProd(0);
         this.setCodProd("");
         this.setDataEntr("1970-01-01");
-        this.setFabrProd("");
+        this.setVlProd(0);
     }
     public JSONObject toJsonObject() {
         JSONObject json = new JSONObject();
         try {
-            json.put("NomeProd", this.nomeProd);
-            json.put("CodProd", this.codProd);
-            json.put("DataEntr", this.dataEntr);
-            json.put("FabrProd", this.fabrProd);
+            json.put("qtEntrada", this.qtdProd);
+            json.put("idProduto", this.codProd);
+            json.put("dtEntrada", this.dataEntr);
+            json.put("vlEntrada", this.vlProd);
         } catch (JSONException e)
         {
             Log.e("Dados", Objects.requireNonNull(e.getMessage()));

@@ -84,14 +84,14 @@ public class ConProdutoFragment extends Fragment implements
 //objeto com informações de filtro da consulta
         Dados dados = new Dados();
         dados.setCodProd("");
-        dados.setFabrProd("");
-        dados.setNomeProd("");
+        dados.setVlProd(0);
+        dados.setQtdProd(0);
         dados.setDataEntr("");
 //incluindo objeto no array de envio
         jsonArray.put(dados.toJsonObject());
 //requisição para o Rest Server SEMPRE POST
         jsonArrayReq = new JsonArrayRequest(Request.Method.POST,
-                "http://10.0.2.2:8080/almoxarifado/consAlmPHP.php",
+                "http://10.0.2.2:8080/cadalm2/consAlmPHP.php",
                 jsonArray, this, this);
 //mando executar a requisção na fila do sistema
         requestQueue.add(jsonArrayReq);

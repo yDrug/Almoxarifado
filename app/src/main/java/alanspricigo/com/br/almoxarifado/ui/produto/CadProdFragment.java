@@ -1,5 +1,6 @@
 package alanspricigo.com.br.almoxarifado.ui.produto;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -36,28 +37,23 @@ import alanspricigo.com.br.almoxarifado.model.Dados;
  * Use the {@link CadProdFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CadProdFragment extends Fragment implements View.OnClickListener, Response.ErrorListener, Response.Listener {
+public class CadProdFragment extends Fragment implements View.OnClickListener, Response.ErrorListener, Response.Listener<JSONObject> {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private View view;
     //Entradas da tela
 
-    private EditText etName;
+    private EditText etQtd;
     private EditText etCod;
     private CalendarView cvDataEntrada;
-    private EditText etFabr;
-    private Button buttonCad;
+    private EditText etVl;
 
     //volley
     private RequestQueue requestQueue;
-    private JsonObjectRequest jsonObjectReq;
 
     public CadProdFragment() {
         // Required empty public constructor
@@ -85,8 +81,9 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -96,12 +93,12 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
         // Inflate the layout for this fragment
         this.view = inflater.inflate(R.layout.fragment_cad_prod, container, false);
         //Binding - Conectando as entradas dos objetos da tela com os componentes XML
-        this.etName = view.findViewById(R.id.etName);
+        this.etQtd = view.findViewById(R.id.etQtd);
         this.etCod = view.findViewById(R.id.etCod);
         this.cvDataEntrada = view.findViewById(R.id.cvDataEntrada);
-        this.etFabr = view.findViewById(R.id.etFabr);
-        this.buttonCad = view.findViewById(R.id.buttonCad);
-        this.buttonCad.setOnClickListener(this);
+        this.etVl = view.findViewById(R.id.etValor);
+        Button buttonCad = view.findViewById(R.id.buttonCad);
+        buttonCad.setOnClickListener(this);
 
 
         //instanciando a fila de requests - caso o objeto seja o view
@@ -114,27 +111,27 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
 
     @Override
     public void onClick(View v) {
-        if (view.getId() == R.id.buttonCad) {
+       // if (view.getId() == R.id.buttonCad) {
             try {
                 //Instacía objeto de negócio (Dados sendo coletados das minhas entradas de informações)
                 Dados dados = new Dados();
                 //Coloca dados da tela no objeto
-                dados.setNomeProd(this.etName.getText().toString());
+                dados.setQtdProd(Integer.parseInt(this.etQtd.getText().toString()));
                 dados.setCodProd(this.etCod.getText().toString());
                 // Formato para transformar data do CalendarView em String
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String dataSelecionada = sdf.format(new Date(cvDataEntrada.getDate()));
-                dados.setFabrProd(this.etFabr.getText().toString());
-                jsonObjectReq = new JsonObjectRequest(
+                dados.setVlProd(Double.parseDouble(this.etVl.getText().toString()));
+                JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
                         Request.Method.POST,
-                        "http://10.0.2.2:8080/seg/cadusuario.php",
+                        "http://10.0.2.2:8080/cadalm2/cadEstoque.php",
                         dados.toJsonObject(), this, this);
                 requestQueue.add(jsonObjectReq);
                 Toast.makeText(view.getContext(), "Cadastro com sucesso.", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }
+      //  }
     }
 
     @Override
@@ -147,10 +144,8 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
     }
 
     @Override
-    public void onResponse(Object response) {
+    public void onResponse(JSONObject json) {
         try {
-            //instanciando objeto para manejar o JSON que recebemos
-            JSONObject json = new JSONObject(response.toString());
             Context context = view.getContext();
             //pegando mensagem que veio do json
             CharSequence mensagem = json.getString("message");
@@ -159,9 +154,9 @@ public class CadProdFragment extends Fragment implements View.OnClickListener, R
             //verificando se salvou sem erro para limpar campos da tela
             if (json.getBoolean("success")) {
 //limpar campos da tela
-                this.etName.setText("");
+                this.etQtd.setText("");
                 this.etCod.setText("");
-                this.etFabr.setText("");
+                this.etVl.setText("");
                 Calendar calendar = Calendar.getInstance();
                 long today = calendar.getTimeInMillis();
                 this.cvDataEntrada.setDate(today, false, true);

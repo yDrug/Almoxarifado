@@ -13,12 +13,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
             <TextView
-                android:id="@+id/textViewName"
+                android:id="@+id/textViewQtd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/nome_prod" />
             <EditText
-                android:id="@+id/etName"
+                android:id="@+id/etQtd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -50,12 +50,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                android:id="@+id/textViewFabr"
+                android:id="@+id/textViewValor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/nome_fabr" />
             <EditText
-                android:id="@+id/etFabr"
+                android:id="@+id/etValor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
